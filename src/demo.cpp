@@ -1,7 +1,8 @@
 #include <iostream>
 #include <memory>
 
- #define OPENCL_ENABLED
+// uncomment here, if you want OpenCL acceleration
+// #define OPENCL_ENABLED
 
 #include "timm_two_stage.h"
 
