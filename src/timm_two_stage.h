@@ -108,9 +108,9 @@ private:
 
 	///////// visualisation stuff ///////////
 
-	template<class T> void draw_cross(cv::Mat& img, T p, int w, cv::Scalar col = cv::Scalar(255, 255, 255))
+	void draw_cross(cv::Mat& img, cv::Point p, int w, cv::Scalar col = cv::Scalar(255, 255, 255))
 	{
-		float w2 = 0.5*w;
+		int w2 = static_cast<int>(round(0.5f * w));
 		cv::line(img, cv::Point(p.x - w2, p.y), cv::Point(p.x + w2, p.y), col);
 		cv::line(img, cv::Point(p.x, p.y - w2), cv::Point(p.x, p.y + w2), col);
 	}
@@ -120,11 +120,11 @@ private:
 	cv::Rect fit_rectangle(cv::Mat frame, cv::Point2f c, int w)
 	{
 		int w2 = w; // half width of windows
-		w2 = clip<int>(w2, 0, 0.5*frame.cols);
-		w2 = clip<int>(w2, 0, 0.5*frame.rows);
+		w2 = clip<int>(w2, 0, round(0.5f*frame.cols));
+		w2 = clip<int>(w2, 0, round(0.5f*frame.rows));
 
-		int x = c.x; x = clip<float>(x, w2, frame.cols - w2);
-		int y = c.y; y = clip<float>(y, w2, frame.rows - w2);
+		int x = c.x; x = clip<int>(x, w2, frame.cols - w2);
+		int y = c.y; y = clip<int>(y, w2, frame.rows - w2);
 		return cv::Rect(x - w2, y - w2, 2 * w2, 2 * w2);
 	}
 
@@ -147,7 +147,7 @@ public:
 		//if given a ground truth pos, draw this too
 		if (ground_truth_pos)
 		{
-			draw_cross(frame, *ground_truth_pos, 7, cv::Scalar(255, 0, 255));
+			draw_cross(frame, cv::Point(*ground_truth_pos), 7, cv::Scalar(255, 0, 255));
 		}
 	}
 
