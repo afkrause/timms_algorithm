@@ -107,6 +107,7 @@ void Opencl_kernel::menu_select_device()
 #ifdef USE_FLTK_GUI // if fltk is available, build a selection menu for the opencl device
 	{
 		Simple_gui sg(50, 50, 400, 100 + 25 * devices_list.size(), "== OpenCL Device Selection ==");
+		sg.num_columns(1);
 		sg.add_separator_box("Select the OpenCL Device:");
 		vector<string> device_names; for (auto& d : devices_list) { device_names.push_back(d.name()); };
 		for (int i = 0; i < devices_list.size(); i++)
