@@ -121,6 +121,7 @@ void Opencl_kernel::menu_select_device()
 		bool is_running = true;
 		sg.add_button("OK", [&]() {is_running = false; });
 		sg.finish();
+		sg.show();
 		while (is_running)
 		{
 			Fl::check();
